@@ -6,6 +6,7 @@ pygame.font.init()
 class Button(Store):
     def __init__(self, x, y, width, height, color, text):
         super().__init__(x, y, width, height, color, text)
+        self.hovered = False
 
     def click(self, pos):
         x1 = pos[0]
@@ -14,6 +15,3 @@ class Button(Store):
             return True
         else:
             return False
-
-    def setText(self, text):
-        self.text = text

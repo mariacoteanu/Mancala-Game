@@ -2,7 +2,7 @@ import pygame
 from circleButton import CircleButton
 from button import Button
 from store import Store
-
+from computerGame import ComputerGame
 pygame.init()
 
 window_width = 600
@@ -17,7 +17,7 @@ background_image = pygame.image.load("wood.jpg").convert()
 WOOD = (186, 140, 99)
 LIGHT_WOOD = (149, 112, 79)
 ROSIATIC = (108, 7, 7)
-
+HOVERED = (114, 68, 33)
 buttons = [CircleButton(450, 70, 30, WOOD, "4"), CircleButton(390, 70, 30, WOOD, "4"),
            CircleButton(330, 70, 30, WOOD, "4"), CircleButton(270, 70, 30, WOOD, "4"),
            CircleButton(210, 70, 30, WOOD, "4"), CircleButton(150, 70, 30, WOOD, "4"),
@@ -29,13 +29,30 @@ buttons = [CircleButton(450, 70, 30, WOOD, "4"), CircleButton(390, 70, 30, WOOD,
 mancala_board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
 
 
+def setButtonsActive(p):
+    if p == 0:
+        for i, btn in zip(range(len(buttons)), buttons):
+            if i < 6:
+                btn.active = True
+            elif 6 < i < 13:
+                btn.active = False
+    else:
+        for i, btn in zip(range(len(buttons)), buttons):
+            if i < 6:
+                btn.active = False
+            elif 6 < i < 13:
+                btn.active = True
+
+
 def run_game():
     run = True
     clock = pygame.time.Clock()
-
+    p = 0
     while run:
         clock.tick(60)
+
         for event in pygame.event.get():
+            setButtonsActive(p)
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
@@ -58,6 +75,7 @@ def run_game():
                             index += 1
                             if index == 13:
                                 index = -1
+            p = (p + 1) % 2
         win.blit(background_image, [0, 0])
         for btn in buttons:
             btn.setText(str(mancala_board[buttons.index(btn)]))
@@ -97,12 +115,17 @@ def menu_screen():
                         index = type_player.index(types)
                         run = False
     if index == 0:
-        run_game()
+        game = ComputerGame(win, buttons, background_image)
+        game.playGame()
     elif index == 1:
         run_game()
 
 
 if __name__ == "__main__":
     while True:
-        menu_screen()
-        # run_game()
+        try:
+            menu_screen()
+            # run_game()
+        except Exception as e:
+            print(str(e))
+            break
