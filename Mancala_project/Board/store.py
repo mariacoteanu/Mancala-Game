@@ -2,6 +2,7 @@ import pygame
 
 pygame.font.init()
 
+
 class Store:
     def __init__(self, x, y, width, height, color, text):
         self.x = x
