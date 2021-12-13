@@ -41,8 +41,10 @@ class ComputerGame:
         self.updateWindow()
         ok = 1
         run = True
+        clock = pygame.time.Clock()
         while run:
             poz = 0
+            clock.tick(60)
             if ok == 0:
                 poz = random.randint(0, 6)
                 while self.board[poz] == 0:
@@ -69,9 +71,14 @@ class ComputerGame:
                 self.board[poz + 1] += 1
             self.updateWindow()
             ok = (ok + 1) % 2
-            if self.is_finished() != -1:
+            done = self.is_finished()
+            if done != -1:
                 font = pygame.font.SysFont("javanesetext", 60)
-                text = font.render("MANCALA", True, (108, 7, 7))
+                if done == 0:
+                    text = font.render("You Lost!", True, (108, 7, 7))
+                else:
+                    ext = font.render("You Won", True, (108, 7, 7))
                 self.win.blit(text, (150, 10))
+                pygame.display.update()
                 time.sleep(1)
                 pygame.quit()

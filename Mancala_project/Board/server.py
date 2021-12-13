@@ -13,7 +13,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-s.listen(2)
+s.listen()
 print("Server Started. Waiting for a connection...")
 
 connected = set()
@@ -37,7 +37,7 @@ def threaded_client(conn, p, gameId):
                     break
                 else:
                     if data == "reset":
-                        game.resetWent()
+                        game.resetGame()
                     elif data != "get":
                         game.play(p, data)
 

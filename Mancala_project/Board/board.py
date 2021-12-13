@@ -1,8 +1,11 @@
 import pygame
+import time
 from circleButton import CircleButton
 from button import Button
 from store import Store
 from computerGame import ComputerGame
+from connection import Connection
+
 pygame.init()
 
 window_width = 600
@@ -26,7 +29,6 @@ buttons = [CircleButton(450, 70, 30, WOOD, "4"), CircleButton(390, 70, 30, WOOD,
            CircleButton(270, 270, 30, LIGHT_WOOD, "4"), CircleButton(330, 270, 30, LIGHT_WOOD, "4"),
            CircleButton(390, 270, 30, LIGHT_WOOD, "4"), CircleButton(450, 270, 30, LIGHT_WOOD, "4"),
            Store(480, 75, 50, 200, LIGHT_WOOD, "0")]
-mancala_board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
 
 
 def setButtonsActive(p):
@@ -44,43 +46,53 @@ def setButtonsActive(p):
                 btn.active = True
 
 
+def updateWindow(current_board):
+    win.blit(background_image, [0, 0])
+    for btn in buttons:
+        btn.setText(str(current_board[buttons.index(btn)]))
+        btn.draw(win)
+    pygame.display.flip()
+
+
 def run_game():
     run = True
     clock = pygame.time.Clock()
-    p = 0
+    n = Connection()
+    player = int(n.getP())
+    print("You are player", player)
+
     while run:
         clock.tick(60)
+        try:
+            game = n.send("get")
+        except:
+            run = False
+            print("Couldn't get game")
+            break
 
         for event in pygame.event.get():
-            setButtonsActive(p)
+            setButtonsActive(player)
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 for btn in buttons:
-                    if btn.click(pos) and mancala_board[buttons.index(btn)] != 0:
-                        index = buttons.index(btn)
-                        nr = mancala_board[index]
-                        mancala_board[index] = 0
-                        btn.setText(str(mancala_board[index]))
-                        btn.draw(win)
-                        if index == 13:
-                            index = -1
-                        for i in range(nr):
-                            mancala_board[index + 1] += 1
-                            btn.setText(str(mancala_board[index + 1]))
-                            btn.draw(win)
-                            pygame.display.update()
-                            index += 1
-                            if index == 13:
-                                index = -1
-            p = (p + 1) % 2
-        win.blit(background_image, [0, 0])
-        for btn in buttons:
-            btn.setText(str(mancala_board[buttons.index(btn)]))
-            btn.draw(win)
-        pygame.display.flip()
+                    if btn.click(pos) and game.board[buttons.index(btn)] != 0:
+                        if (player == 0 and game.p2Went) or (player == 1 and game.p1Went):
+                            fin = game.move(buttons.index(btn), player)
+                            if fin != -1:
+                                font = pygame.font.SysFont("javanesetext", 60)
+                                if fin == player:
+                                    text = font.render("You Lost!", True, (108, 7, 7))
+                                else:
+                                    text = font.render("You Won", True, (108, 7, 7))
+                                win.blit(text, (150, 10))
+                                pygame.display.update()
+                                time.sleep(1)
+                                pygame.quit()
+
+        updateWindow(game.board)
 
 
 def menu_screen():

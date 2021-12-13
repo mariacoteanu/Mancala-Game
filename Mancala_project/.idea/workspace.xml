@@ -4,10 +4,9 @@
     <list default="true" id="961290ff-053a-4c47-a16f-2da3f4e9b9ca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board/button.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/button.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board/circleButton.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/circleButton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/computerGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/computerGame.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board/store.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +103,8 @@
       <workItem from="1638781609243" duration="3682000" />
       <workItem from="1638802864715" duration="3147000" />
       <workItem from="1638873937458" duration="610000" />
-      <workItem from="1639051247797" duration="9348000" />
+      <workItem from="1639051247797" duration="9433000" />
+      <workItem from="1639127706054" duration="5388000" />
     </task>
     <servers />
   </component>
@@ -123,6 +123,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Mancala_project$board.coverage" NAME="board Coverage Results" MODIFIED="1639079571804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Board" />
+    <SUITE FILE_PATH="coverage/Mancala_project$board.coverage" NAME="board Coverage Results" MODIFIED="1639157581347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Board" />
   </component>
 </project>
