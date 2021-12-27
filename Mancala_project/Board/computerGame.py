@@ -10,9 +10,15 @@ class ComputerGame:
         self.board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
         self.buttons = buttons
         self.backgroundImage = bgImg
+        self.setAIButtonsInactive()
+        self.setPlayerButtonsInactive()
+
+    def setAIButtonsInactive(self):
+        for btn in range(7):
+            self.buttons[btn].active = False
 
     def setPlayerButtonsActive(self):
-        for btn in range(7, len(self.buttons)):
+        for btn in range(7, len(self.buttons) - 1):
             self.buttons[btn].active = True
 
     def setPlayerButtonsInactive(self):
@@ -80,11 +86,11 @@ class ComputerGame:
                             run = False
                             pygame.quit()
                         if event.type == pygame.MOUSEBUTTONDOWN:
-                            entered = True
                             pos = pygame.mouse.get_pos()
                             for btn in self.buttons:
                                 if btn.click(pos) and self.board[self.buttons.index(btn)] != 0:
                                     poz = self.buttons.index(btn)
+                                    entered = True
                             seeds = self.board[poz]
                             self.board[poz] = 0
                             for i in range(seeds):
@@ -100,18 +106,17 @@ class ComputerGame:
                         end = time.time()
                 self.setPlayerButtonsInactive()
                 lock.release()
-            print(f'BOARD: \n {self.board}')
+            print(f'ok = {ok} ==> BOARD: \n {self.board}')
             self.updateWindow()
             ok = (ok + 1) % 2
             done = self.is_finished()
-            print(f'done = {done}')
             if done != -1:
-                font = pygame.font.SysFont("javanesetext", 60)
+                font = pygame.font.SysFont("inkfree", 80)
                 if done == 0:
-                    text = font.render("You Lost!", True, (108, 7, 7))
+                    text = font.render("You Lost!", True, (51, 7, 7))
                 else:
-                    text = font.render("You Won", True, (108, 7, 7))
-                self.win.blit(text, (150, 10))
+                    text = font.render("You Won", True, (51, 7, 7))
+                self.win.blit(text, (170, 300))
                 pygame.display.update()
                 time.sleep(2)
                 return

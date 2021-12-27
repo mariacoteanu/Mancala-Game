@@ -36,20 +36,31 @@ def setButtonsActive(p):
         for i, btn in zip(range(len(buttons)), buttons):
             if i < 6:
                 btn.active = True
-            elif 6 < i < 13:
-                btn.active = False
     else:
         for i, btn in zip(range(len(buttons)), buttons):
-            if i < 6:
-                btn.active = False
-            elif 6 < i < 13:
+            if 6 < i < 13:
                 btn.active = True
 
 
-def updateWindow(current_board):
+def setButtonsInactive():
+    for i, btn in zip(range(len(buttons)), buttons):
+        btn.active = False
+
+
+def updateWindow(game):
     win.blit(background_image, [0, 0])
+    if not game.connected():
+        font = pygame.font.SysFont("javanesetext", 60)
+        text = font.render("Waiting for opponent...", True, (51, 7, 7))
+        win.blit(text, (50, 100))
+        pygame.display.update()
+        ready = False
+        while not ready:
+            if game.connected():
+                ready = True
+    
     for btn in buttons:
-        btn.setText(str(current_board[buttons.index(btn)]))
+        btn.setText(str(game.board[buttons.index(btn)]))
         btn.draw(win)
     pygame.display.flip()
 
@@ -59,6 +70,8 @@ def run_game():
     clock = pygame.time.Clock()
     n = Connection()
     player = int(n.getP())
+    tour = 0
+    setButtonsInactive()
     print("You are player", player)
 
     while run:
@@ -69,30 +82,31 @@ def run_game():
             run = False
             print(str(ex), "\nCouldn't get game")
             break
+        if game.done:
+            font = pygame.font.SysFont("inkfree", 80)
+            if game.winner == player:
+                text = font.render("You Lost!", True, (51, 7, 7))
+            else:
+                text = font.render("You Won", True, (51, 7, 7))
+            win.blit(text, (170, 300))
+            pygame.display.update()
+            time.sleep(1)
+            break
 
-        for event in pygame.event.get():
+        if tour == player:
             setButtonsActive(player)
-            if event.type == pygame.QUIT:
-                run = False
-                pygame.quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                for btn in buttons:
-                    if btn.click(pos) and game.board[buttons.index(btn)] != 0:
-                        if (player == 0 and game.p2Went) or (player == 1 and game.p1Went):
-                            fin = game.move(buttons.index(btn), player)
-                            if fin != -1:
-                                font = pygame.font.SysFont("javanesetext", 60)
-                                if fin == player:
-                                    text = font.render("You Lost!", True, (108, 7, 7))
-                                else:
-                                    text = font.render("You Won", True, (108, 7, 7))
-                                win.blit(text, (150, 10))
-                                pygame.display.update()
-                                time.sleep(1)
-                                pygame.quit()
-
-        updateWindow(game.board)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                    pygame.quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+                    for btn in buttons:
+                        if btn.click(pos) and game.board[buttons.index(btn)] != 0:
+                            if (player == 0 and game.p1Went) or (player == 1 and game.p0Went):
+                                n.send(str(buttons.index(btn)))
+        updateWindow(game)
+        tour = (tour + 1) % 2
 
 
 def menu_screen():
