@@ -65,9 +65,9 @@ def run_game():
         clock.tick(60)
         try:
             game = n.send("get")
-        except:
+        except Exception as ex:
             run = False
-            print("Couldn't get game")
+            print(str(ex), "\nCouldn't get game")
             break
 
         for event in pygame.event.get():
@@ -101,10 +101,10 @@ def menu_screen():
 
     win.blit(background_image, [0, 0])
     font = pygame.font.SysFont("javanesetext", 60)
-    text = font.render("MANCALA", 1, ROSIATIC)
+    text = font.render("MANCALA", True, ROSIATIC)
     win.blit(text, (150, 10))
     font2 = pygame.font.SysFont("comicsans", 50)
-    text2 = font2.render("Choose your partner", 1, ROSIATIC)
+    text2 = font2.render("Choose your partner", True, ROSIATIC)
     win.blit(text2, (70, 150))
 
     type_player = [Button(100, 250, 180, 40, WOOD, "computer"), Button(330, 250, 180, 40, LIGHT_WOOD, "human")]
@@ -129,8 +129,10 @@ def menu_screen():
     if index == 0:
         game = ComputerGame(win, buttons, background_image)
         game.playGame()
+        menu_screen()
     elif index == 1:
         run_game()
+        menu_screen()
 
 
 if __name__ == "__main__":

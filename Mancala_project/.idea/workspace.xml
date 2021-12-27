@@ -5,8 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board/computerGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/computerGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,11 +105,38 @@
       <workItem from="1638873937458" duration="610000" />
       <workItem from="1639051247797" duration="9433000" />
       <workItem from="1639127706054" duration="5388000" />
+      <workItem from="1639406285460" duration="1697000" />
+      <workItem from="1640343481826" duration="6916000" />
+      <workItem from="1640586895832" duration="781000" />
     </task>
+    <task id="LOCAL-00001" summary="added client-server support">
+      <created>1639406415591</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1639406415591</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added client-server support" />
+    <option name="LAST_COMMIT_MESSAGE" value="added client-server support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -123,6 +150,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Mancala_project$board.coverage" NAME="board Coverage Results" MODIFIED="1639157581347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Board" />
+    <SUITE FILE_PATH="coverage/Mancala_project$board.coverage" NAME="board Coverage Results" MODIFIED="1640587679802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Board" />
   </component>
 </project>
