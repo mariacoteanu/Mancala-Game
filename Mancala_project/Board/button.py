@@ -4,6 +4,7 @@ the different between he and his father is the fact that he can be clicked and d
 """
 import pygame
 from store import Store
+
 pygame.font.init()
 
 
@@ -20,7 +21,7 @@ class Button(Store):
         """
         x1 = pos[0]
         y1 = pos[1]
-        if self.x <= x1 <= self.x + self.width and self.y <= y1 <= self.y + self.height:
+        if self.x <= x1 <= self.x+self.width and self.y <= y1 <= self.y+self.height:
             return True
         else:
             return False

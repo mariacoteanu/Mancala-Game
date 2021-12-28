@@ -16,18 +16,18 @@ class Store:
         self.color = color
         self.text = text
 
-    def draw(self, win):
+    def draw(self, py_window):
         """in this function is draw on pygame window an rectangular"""
-        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(py_window, self.color, (self.x, self.y, self.width, self.height))
         font = pygame.font.SysFont("comicsans", 40)
         text = font.render(self.text, True, (255, 255, 255))
-        win.blit(text, (self.x + round(self.width / 2) - round(text.get_width() / 2),
-                        self.y + round(self.height / 2) - round(text.get_height() / 2)))
+        py_window.blit(text, (self.x+round(self.width/2)-round(text.get_width()/2),
+                              self.y+round(self.height/2)-round(text.get_height()/2)))
 
     def click(self, pos):
         """this storage can not be clicked/modified by user"""
         return False
 
-    def setText(self, text):
+    def set_text(self, text):
         """update the text on the store, is used by all inherited classes"""
         self.text = text

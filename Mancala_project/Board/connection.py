@@ -7,16 +7,16 @@ import pickle
 
 class Connection:
     def __init__(self):
-        """Connection contructor where are initialized the socket, server address, port and which player is"""
+        """Connection constructor where are initialized the socket, server address, port and which player is"""
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server = "127.0.0.1"
         self.port = 2929
         self.addr = (self.server, self.port)
-        self.p = self.connect()
+        self.player_id = self.connect()
 
-    def getP(self):
+    def get_player_id(self):
         """return which player client is"""
-        return self.p
+        return self.player_id
 
     def connect(self):
         """
@@ -40,20 +40,22 @@ class Connection:
         """
         try:
             self.client.send(str.encode(data))  # sending data from client to server
-            PADSIZE = 10
-            fullmessage = b''
+            PAD_SIZE = 10
+            full_message = b''
             new_data = True
-            objlen = 0
+            object_len = 0
+
             while True:  # I prepare to receive whole bytes from server because the data he send might be more
                 # then 4096 bytes so i concatenate all to send all data
-                info = self.client.recv(2048 * 2)
+                info = self.client.recv(2048*2)
+
                 if new_data:
-                    # print("full message len", info[:PADSIZE])
-                    objlen = int(info[:PADSIZE])  # first data received contain the length of full message
+                    # print("full message len", info[:PAD_SIZE])
+                    object_len = int(info[:PAD_SIZE])  # first data received contain the length of full message
                     new_data = False
-                fullmessage += info
-                if len(fullmessage) - PADSIZE == objlen:  # when is received whole message, is send to client
+                full_message += info
+                if len(full_message)-PAD_SIZE == object_len:  # when is received whole message, is send to client
                     # print("full msg received")
-                    return pickle.loads(fullmessage[PADSIZE:])
+                    return pickle.loads(full_message[PAD_SIZE:])
         except socket.error as e:
             print(e)
